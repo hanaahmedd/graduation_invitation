@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Space Graduation Invitation</title>
 <style>
 
@@ -13,7 +14,7 @@ box-sizing:border-box;
 body{
 height:100vh;
 overflow:hidden;
-font-family:'Segoe UI',sans-serif;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 background:black;
 color:white;
 }
@@ -103,7 +104,7 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:260px;
+width:260px; 
 padding:35px;
 border-radius:20px;
 background:rgba(0,220,255,.15);
@@ -124,6 +125,7 @@ font-size:22px;
 
 .message p{
 margin-top:15px;
+line-height: 1.5;
 }
 
 /* Hides the text when the card is opened */
@@ -148,11 +150,12 @@ margin-top:15px;
 .open{
 opacity: 1 !important; 
 animation:openCard 2s forwards !important;
+cursor: default;
 }
 
 @keyframes openCard{
 to{
-width:450px; 
+width:520px; 
 transform:translate(-50%,-50%) scale(1.05) rotate(0deg);
 background:rgba(0,0,20,.95);
 }
@@ -161,12 +164,19 @@ background:rgba(0,0,20,.95);
 /* DETAILS */
 .details{
 display:none;
-margin-top:25px;
+margin-top:15px;
+}
+
+.details h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
 }
 
 .details h2 {
-    font-size: 18px; /* Adjusted slightly to fit the longer title comfortably */
+    font-size: 16px;
     margin-top: 10px;
+    color: #ddd;
+    line-height: 1.4;
 }
 
 .show{
@@ -179,11 +189,31 @@ from{ opacity:0; transform:translateY(40px); }
 to{ opacity:1; }
 }
 
+/* FLEX CONTAINER FOR BOXES */
+.box-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .box{
-margin:15px;
+flex: 1;
 padding:15px;
 border-left:3px solid #00eaff;
 background:rgba(0,0,0,.4);
+text-align: left;
+font-size: 14px;
+line-height: 1.6;
+}
+
+/* Arabic text alignment helper */
+.ar-text {
+    display: block;
+    direction: rtl;
+    font-size: 1em;
+    margin-top: 3px;
 }
 
 </style>
@@ -220,20 +250,24 @@ document.body.appendChild(star);
 <h1>GRADUATION PROJECT</h1>
 <h2>Onboard Camera System for<br>Space Debris Detection and Decision-Making</h2>
 
-<div class="box">
-<b>Date:</b><br>
-5 July<br>
-<b>Time:</b>
-11:00 AM - 12:00 PM
+<div class="box-container">
+    <div class="box">
+        <b>Date / التاريخ:</b><br>
+        5 July / 5 يوليو<br><br>
+        <b>Time / الوقت:</b><br>
+        11:00 AM - 12:00 PM
+    </div>
+
+    <div class="box">
+        <b>Location / المكان:</b><br>
+        Lab Electronics 2<br>
+        <span class="ar-text">معمل إلكترونيات ٢</span><br>
+        Capital (Helwan) University<br>
+        <span class="ar-text">جامعة العاصمة (حلوان)</span>
+    </div>
 </div>
 
-<div class="box">
-<b>Location:</b><br>
-Lab Electronics 2<br>
-Capital (Helwan) University
-</div>
-
-<p>We look forward to seeing you there 🌌</p>
+<p>We look forward to seeing you there<br><span class="ar-text">نتطلع لرؤيتكم هناك</span> 🌌</p>
 
 </div>
 </div>
@@ -241,10 +275,13 @@ Capital (Helwan) University
 
 <script>
 function openMessage(card){
-card.classList.add("open");
-setTimeout(()=>{
-card.querySelector(".details").classList.add("show");
-},1500);
+// Only run if it hasn't been opened yet
+if(!card.classList.contains("open")){
+    card.classList.add("open");
+    setTimeout(()=>{
+    card.querySelector(".details").classList.add("show");
+    },1500);
+}
 }
 </script>
 </body>
