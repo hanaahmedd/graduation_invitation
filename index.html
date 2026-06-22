@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Space Graduation Invitation</title>
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+background:black;
+color:white;
+}
+
+/* GALAXY BACKGROUND */
+.space{
+position:absolute;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%,#263b68,transparent 25%),
+radial-gradient(circle at 80% 20%,#402060,transparent 30%),
+radial-gradient(circle,#02030b,#000);
+overflow:hidden;
+}
+
+/* NEBULA */
+.nebula{
+position:absolute;
+width:800px;
+height:800px;
+background:
+radial-gradient(circle,#0066ff55,transparent 60%);
+filter:blur(50px);
+top:20%;
+left:30%;
+animation:nebula 10s infinite alternate;
+}
+
+@keyframes nebula{
+from{ transform:scale(1); }
+to{ transform:scale(1.5); }
+}
+
+/* STARS */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:warp 5s linear infinite;
+}
+
+@keyframes warp{
+from{ transform:translateY(0) scale(1); }
+to{ transform:translateY(100vh) scale(4); opacity:0; }
+}
+
+/* PLANET */
+.planet{
+position:absolute;
+width:260px;
+height:260px;
+border-radius:50%;
+background:
+radial-gradient(circle at 30% 30%,
+#7ec8ff,
+#12345f,
+black);
+right:-80px;
+bottom:80px;
+box-shadow:0 0 80px #0077ff;
+}
+
+/* --- ROCKET SHIP --- */
+.rocket{
+position:absolute;
+font-size:70px;
+z-index:10;
+top:-20%;
+left:-20%;
+animation:rocketFly 4s ease-in-out forwards;
+filter:drop-shadow(0 0 15px rgba(255, 100, 0, 0.8));
+}
+
+@keyframes rocketFly{
+0% { top: 10%; left: -20%; transform: rotate(45deg); }
+35% { top: 25%; left: 50%; transform: rotate(60deg); } 
+100% { top: -20%; left: 120%; transform: rotate(20deg); }
+}
+
+
+/* FLOATING MESSAGE */
+.message{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:260px;
+padding:35px;
+border-radius:20px;
+background:rgba(0,220,255,.15);
+border:1px solid #00eaff;
+box-shadow:0 0 40px #00eaff;
+text-align:center;
+cursor:pointer;
+opacity:0;
+animation:
+    dropMessage 1.5s 1.4s ease-out forwards, 
+    floating 4s 2.9s infinite ease-in-out; 
+}
+
+.message h1{
+color:#00eaff;
+font-size:22px;
+}
+
+.message p{
+margin-top:15px;
+}
+
+/* Hides the text when the card is opened */
+.message.open .click-text {
+    display: none;
+}
+
+/* --- MESSAGE DROP EFFECT --- */
+@keyframes dropMessage{
+0% { top: 25%; opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+10% { opacity: 1; }
+100% { top: 50%; opacity: 1; transform: translate(-50%, -55%) scale(1); } 
+}
+
+/* ORIGINAL FLOATING */
+@keyframes floating{
+0%,100%{ transform:translate(-50%,-55%); }
+50%{ transform:translate(-50%,-45%); }
+}
+
+/* OPEN EFFECT */
+.open{
+opacity: 1 !important; 
+animation:openCard 2s forwards !important;
+}
+
+@keyframes openCard{
+to{
+width:450px; 
+transform:translate(-50%,-50%) scale(1.05) rotate(0deg);
+background:rgba(0,0,20,.95);
+}
+}
+
+/* DETAILS */
+.details{
+display:none;
+margin-top:25px;
+}
+
+.details h2 {
+    font-size: 18px; /* Adjusted slightly to fit the longer title comfortably */
+    margin-top: 10px;
+}
+
+.show{
+display:block;
+animation:fade 2s;
+}
+
+@keyframes fade{
+from{ opacity:0; transform:translateY(40px); }
+to{ opacity:1; }
+}
+
+.box{
+margin:15px;
+padding:15px;
+border-left:3px solid #00eaff;
+background:rgba(0,0,0,.4);
+}
+
+</style>
+</head>
+<body>
+
+<div class="space">
+
+<div class="nebula"></div>
+
+<div class="planet"></div>
+
+<div class="rocket">🚀</div>
+
+<script>
+// create stars
+for(let i=0;i<200;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+star.style.animationDelay=Math.random()*5+"s";
+document.body.appendChild(star);
+}
+</script>
+
+<div class="message" onclick="openMessage(this)">
+
+<h1>📡 INCOMING MESSAGE</h1>
+
+<p class="click-text">Click to decode<br>🚀</p>
+
+<div class="details">
+<h1>GRADUATION PROJECT</h1>
+<h2>Onboard Camera System for<br>Space Debris Detection and Decision-Making</h2>
+
+<div class="box">
+<b>Date:</b><br>
+5 July<br>
+<b>Time:</b>
+11:00 AM - 12:00 PM
+</div>
+
+<div class="box">
+<b>Location:</b><br>
+Lab Electronics 2<br>
+Capital (Helwan) University
+</div>
+
+<p>We look forward to seeing you there 🌌</p>
+
+</div>
+</div>
+</div>
+
+<script>
+function openMessage(card){
+card.classList.add("open");
+setTimeout(()=>{
+card.querySelector(".details").classList.add("show");
+},1500);
+}
+</script>
+</body>
+</html>
